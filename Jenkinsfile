@@ -1,3 +1,4 @@
+
 node{
 stage("Checkout"){
   echo "cheking out the code"
@@ -7,7 +8,7 @@ stage("Checkout"){
 stage("Build"){
   echo "building the code"
   //sh "mvn -Dmaven.test.failure.ignore=true clean package"
-  sh '/opt/Programs/maven/apache-maven-3.6.3/bin/mvn clean install'
+  sh 'mvn clean install'
 }
 
 stage("CodeQualityAndCoverage"){
