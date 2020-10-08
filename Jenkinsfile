@@ -2,12 +2,12 @@ node{
 stage("Checkout"){
   echo "cheking out the code"
   git 'https://github.com/simkazw/startscripts.git'
-  //sh "mvn -Dmaven.test.failure.ignore=true clean package"
-  sh '/opt/Programs/maven/apache-maven-3.6.3/bin/mvn clean install'
 }
 
 stage("Build"){
   echo "building the code"
+  //sh "mvn -Dmaven.test.failure.ignore=true clean package"
+  sh '/opt/Programs/maven/apache-maven-3.6.3/bin/mvn clean install'
 }
 
 stage("CodeQualityAndCoverage"){
