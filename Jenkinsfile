@@ -1,4 +1,8 @@
 node{
+  
+  tools{
+    maven "Maven 3.2.5"
+  }
 stage("Checkout"){
   echo "cheking out the code"
   git 'https://github.com/simkazw/startscripts.git'
