@@ -1,4 +1,4 @@
-
+/*
 node{
 stage("Checkout"){
   echo "cheking out the code"
@@ -29,3 +29,45 @@ stage("UATDeployment"){
 
 
 }
+*/
+
+node{
+stage("Checkout"){
+  echo "cheking out the code"
+  git 'https://github.com/Bobiology/startscripts.git'
+}
+
+ 
+
+stage("Build"){
+  echo "building the code"
+  //sh "mvn -Dmaven.test.failure.ignore=true clean package"
+  sh '/Users/Shared/SOFTWARE/RUNNING/apache-maven-3.6.3/bin/mvn clean install'
+}
+  stage('SonarQube analysis') {
+    def mvnHome = tool name: 'MAVEN_HOME', type: 'maven'
+    withSonarQubeEnv('SonarQube'){
+      sh "${mvnHome}/bin/mvn sonar:sonar"
+    }
+    timeout(time: 1, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
+        }
+  }
+  
+stage("AUtomatedTesting"){
+  echo "automated code testing"
+}
+
+ 
+
+stage("PreRequisiteCheck"){
+  echo "cheking required document"
+}
+
+ 
+
+stage("UATDeployment"){
+  echo "deploying in UAT"
+}
+}
+ 
