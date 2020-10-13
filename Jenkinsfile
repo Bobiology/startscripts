@@ -49,8 +49,8 @@ stage("Build"){
     withSonarQubeEnv('SonarQube'){
       sh "${mvnHome}/bin/mvn sonar:sonar"
     }
-    timeout(time: 9, unit: 'MINUTES') {
-            waitForQualityGate abortPipeline: true
+    timeout(time: 3, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: false
         }
   }
   
